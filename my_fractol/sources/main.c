@@ -6,7 +6,7 @@
 /*   By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:46:04 by ctrouve           #+#    #+#             */
-/*   Updated: 2022/06/01 16:05:32 by ctrouve          ###   ########.fr       */
+/*   Updated: 2022/06/01 20:25:19 by ctrouve          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		if (check_fractal(argv[1]))
-			printf("ok!\n");
-			//start_fractol(argv[1]);
+			//printf("ok!\n");
+			start_fractol(argv[1]);
 		else
 			terminate(ERR_USAGE);
 	}

@@ -6,7 +6,7 @@
 #    By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/01 15:23:07 by ctrouve           #+#    #+#              #
-#    Updated: 2022/06/01 16:06:43 by ctrouve          ###   ########.fr        #
+#    Updated: 2022/06/01 20:30:17 by ctrouve          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_DIRECTORY = ./sources/
 SOURCES_LIST = \
+	init.c\
+	key_events.c\
 	main.c\
 	small_fns.c\
 	start_fractol.c
