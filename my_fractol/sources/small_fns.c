@@ -6,19 +6,39 @@
 /*   By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 15:27:34 by ctrouve           #+#    #+#             */
-/*   Updated: 2022/06/01 15:38:29 by ctrouve          ###   ########.fr       */
+/*   Updated: 2022/06/08 12:20:29 by ctrouve          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 /*
-** Terminate execution and display error message either from pre-defined error 
+** Terminate execution and display error message from pre-defined error 
 ** types (macros) .
 */
 
 void	terminate(char *s)
 {
 	ft_putendl(s);
-	exit(1);
+	exit(0);
 }
+
+/*
+** Terminate execution when close "cross" is clicked.
+*/
+
+int		close_window(void *param)
+{
+	(void)param;
+	exit(0);
+}
+
+t_complex	init_complex(double re, double im)
+{
+	t_complex	complex;
+
+	complex.re = re;
+	complex.im = im;
+	return (complex);
+}
+
