@@ -70,6 +70,7 @@ void			put_pixel(t_mlx *mlx, int x, int y, int color);
 /*
 ** draw
 */
+double			ft_double_abs(double nbr);
 void			draw_win(t_fractol *fractol);
 uint32_t		draw_mandelbrot(t_fractol *fractol, t_vec2 pos);
 uint32_t		draw_julia(t_fractol *fractol, t_vec2 pos);

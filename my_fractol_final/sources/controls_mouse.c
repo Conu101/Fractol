@@ -6,19 +6,19 @@
 /*   By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 14:22:25 by ctrouve           #+#    #+#             */
-/*   Updated: 2022/06/14 18:17:59 by ctrouve          ###   ########.fr       */
+/*   Updated: 2022/06/14 20:26:40 by ctrouve          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include "key_macos.h"
+#include "keycodes_mac.h"
 
 static double	interpolate(double start, double end, double interpolation)
 {
 	return (start + ((end - start) * interpolation));
 }
 
-int				zoom(int button, int x, int y, t_fractol *fractol)
+int	zoom(int button, int x, int y, t_fractol *fractol)
 {
 	t_complex	mouse;
 	double		interpolation;
@@ -27,10 +27,10 @@ int				zoom(int button, int x, int y, t_fractol *fractol)
 	if (!fractol->menu_on
 		&& (button == MOUSE_SCROLL_UP || button == MOUSE_SCROLL_DOWN))
 	{
-		mouse = init_complex(
-			(double)x / (WIDTH / (fractol->max.re - fractol->min.re))
-				+ fractol->min.re,
-			(double)y / (HEIGHT / (fractol->max.im - fractol->min.im))
+		mouse = init_complex(\
+			(double)x / (WIDTH / (fractol->max.re - fractol->min.re)) \
+				+ fractol->min.re, \
+			(double)y / (HEIGHT / (fractol->max.im - fractol->min.im)) \
 				* -1 + fractol->max.im);
 		if (button == MOUSE_SCROLL_UP)
 			zoom = 0.80;
@@ -46,12 +46,12 @@ int				zoom(int button, int x, int y, t_fractol *fractol)
 	return (0);
 }
 
-int				julia_motion(int x, int y, t_fractol *fractol)
+int	julia_setting(int x, int y, t_fractol *fractol)
 {
-	if (!fractol->menu_on && !fractol->is_julia_fixed)
+	if (!fractol->menu_on && !fractol->set_julia)
 	{
-		fractol->k = init_complex(
-			4 * ((double)x / WIDTH - 0.5),
+		fractol->k = init_complex(\
+			4 * ((double)x / WIDTH - 0.5), \
 			4 * ((double)(HEIGHT - y) / HEIGHT - 0.5));
 		draw_fractal(fractol);
 	}

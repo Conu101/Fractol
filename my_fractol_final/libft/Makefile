@@ -6,7 +6,7 @@
 #    By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/18 14:16:27 by ctrouve           #+#    #+#              #
-#    Updated: 2022/06/14 18:53:09 by ctrouve          ###   ########.fr        #
+#    Updated: 2022/06/14 19:01:57 by ctrouve          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,7 +99,7 @@ OBJECTS	= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
 # COLORS
 
 GREEN = \033[0;32m
-RED = \033[0;34m
+VIOLET = \033[0;35m
 RESET = \033[0m
 
 .PHONY: all clean fclean re
@@ -122,12 +122,12 @@ $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c $(HEADERS)
 
 clean:
 	@rm -rf $(OBJECTS_DIRECTORY)
-	@echo "$(NAME): $(RED)$(OBJECTS_DIRECTORY) was deleted$(RESET)"
-	@echo "$(NAME): $(RED)object files were deleted$(RESET)"
+	@echo "$(NAME): $(VIOLET)$(OBJECTS_DIRECTORY) was deleted$(RESET)"
+	@echo "$(NAME): $(VIOLET)object files were deleted$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(NAME): $(RED)$(NAME) was deleted$(RESET)"
+	@echo "$(NAME): $(VIOLET)$(NAME) was deleted$(RESET)"
 
 re:
 	@$(MAKE) fclean

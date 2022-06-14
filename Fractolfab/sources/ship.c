@@ -1,6 +1,11 @@
 # include "libft.h"
 # include "fractol.h"
 
+double	ft_double_abs(double nbr)
+{
+	return (nbr > 0 ? nbr : -nbr);
+}
+
 uint32_t	draw_ship(t_fractol *fractol, t_vec2 pos)
 {
 	t_reel		base_point;

@@ -6,7 +6,7 @@
 #    By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/08 17:43:36 by ctrouve           #+#    #+#              #
-#    Updated: 2022/06/09 11:59:56 by ctrouve          ###   ########.fr        #
+#    Updated: 2022/06/14 19:15:23 by ctrouve          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ MINILIBX_HEADERS = $(MINILIBX_DIRECTORY)
 HEADERS_DIRECTORY = ./includes/
 HEADERS_LIST = \
 	fractol.h\
-	mlx_keycodes.h
+	mlx_keycode.h
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_DIRECTORY = ./sources/

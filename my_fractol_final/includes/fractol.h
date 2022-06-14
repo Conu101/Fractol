@@ -6,7 +6,7 @@
 /*   By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:47:39 by ctrouve           #+#    #+#             */
-/*   Updated: 2022/06/14 18:56:57 by ctrouve          ###   ########.fr       */
+/*   Updated: 2022/06/14 20:26:13 by ctrouve          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 # define FRACTOL_H
 
-# define WIDTH		1000
-# define HEIGHT		1000
+# define WIDTH		1920
+# define HEIGHT		1080
 
 # define THREADS	4
 
@@ -133,7 +133,7 @@ typedef struct		s_fractol
 	t_complex		factor;
 	t_complex		c;
 	t_complex		k;
-	t_bool			is_julia_fixed;
+	t_bool			set_julia;
 	int				start_line;
 	int				finish_line;
 	int				color_shift;
@@ -194,8 +194,6 @@ int					iterate_julia(t_fractol *fractol);
 
 int					iterate_celtic_mandelbrot(t_fractol *fractol);
 
-int					iterate_julia_cube(t_fractol *fractol);
-
 int					iterate_sierpinski(t_fractol *fractol);
 
 
@@ -213,13 +211,13 @@ int					key_press(int key, t_fractol *fractol);
 
 int					zoom(int button, int x, int y, t_fractol *fractol);
 
-int					julia_motion(int x, int y, t_fractol *fractol);
+int					julia_setting(int x, int y, t_fractol *fractol);
 
 /*
 ** Print
 */
 
-void				print_help(void);
+void				print_usage(void);
 
 /*
 ** Utils

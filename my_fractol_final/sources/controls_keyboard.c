@@ -6,14 +6,14 @@
 /*   By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 20:29:02 by ctrouve           #+#    #+#             */
-/*   Updated: 2022/06/14 18:45:33 by ctrouve          ###   ########.fr       */
+/*   Updated: 2022/06/14 20:25:11 by ctrouve          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include "key_macos.h"
+#include "keycodes_mac.h"
 
-static void menu(t_fractol *fractol)
+static void	menu(t_fractol *fractol)
 {
 	fractol->menu_on = !fractol->menu_on;
 	if (fractol->menu_on)
@@ -26,8 +26,8 @@ static void	move(int key, t_fractol *fractol)
 {
 	t_complex	delta;
 
-	delta = init_complex(ft_abs(fractol->max.re - fractol->min.re),
-		ft_abs(fractol->max.im - fractol->min.im));
+	delta = init_complex(ft_abs(fractol->max.re - fractol->min.re), \
+	ft_abs(fractol->max.im - fractol->min.im));
 	if (key == ARROW_LEFT)
 	{
 		fractol->min.re -= delta.re * 0.05;
@@ -57,13 +57,13 @@ static void	change_max_iteration(int key, t_fractol *fractol)
 	{
 		if (fractol->max_iteration < 50)
 			fractol->max_iteration += 1;
-		else if (fractol->max_iteration < 1000000000)
-			fractol->max_iteration = (int)(fractol->max_iteration * 1.05);
+		else if (fractol->max_iteration < 10000000)
+			fractol->max_iteration = (int)(fractol->max_iteration * 1.1);
 	}
 	if (key == MAIN_PAD_MINUS || key == NUM_PAD_MINUS)
 	{
 		if (fractol->max_iteration > 50)
-			fractol->max_iteration = (int)(fractol->max_iteration * 0.95);
+			fractol->max_iteration = (int)(fractol->max_iteration * 0.9);
 		else if (fractol->max_iteration > 1)
 			fractol->max_iteration -= 1;
 	}
@@ -76,12 +76,12 @@ static void	change_color_shift(t_fractol *fractol)
 	draw_fractal(fractol);
 }
 
-int			key_press(int key, t_fractol *fractol)
+int	key_press(int key, t_fractol *fractol)
 {
 	if (key == MAIN_PAD_ESC)
 		exit(0);
 	else if (key == MAIN_PAD_M)
-	 menu(fractol);
+		menu(fractol);
 	else if (!fractol->menu_on)
 	{
 		if (key == MAIN_PAD_R)
@@ -89,16 +89,16 @@ int			key_press(int key, t_fractol *fractol)
 			set_defaults(fractol);
 			draw_fractal(fractol);
 		}
-		else if (key == MAIN_PAD_MINUS || key == NUM_PAD_MINUS
+		else if (key == MAIN_PAD_MINUS || key == NUM_PAD_MINUS \
 				|| key == MAIN_PAD_PLUS || key == NUM_PAD_PLUS)
 			change_max_iteration(key, fractol);
-		else if (key == ARROW_LEFT || key == ARROW_RIGHT
+		else if (key == ARROW_LEFT || key == ARROW_RIGHT \
 				|| key == ARROW_UP || key == ARROW_DOWN)
 			move(key, fractol);
 		else if (key == MAIN_PAD_C)
 			change_color_shift(fractol);
 		else if (key == MAIN_PAD_SPACE)
-			fractol->is_julia_fixed = !fractol->is_julia_fixed;
+			fractol->set_julia = !fractol->set_julia;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/01 15:23:07 by ctrouve           #+#    #+#              #
-#    Updated: 2022/06/14 18:50:41 by ctrouve          ###   ########.fr        #
+#    Updated: 2022/06/14 19:29:52 by ctrouve          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,9 @@ MINILIBX_DIRECTORY = ./minilibx_macos/
 MINILIBX_HEADERS = $(MINILIBX_DIRECTORY)
 
 HEADERS_LIST = \
+	error.h\
 	fractol.h\
-	color.h\
-	key_macos.h\
-	error_message.h
+	keycodes_mac.h
 HEADERS_DIRECTORY = ./includes/
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
@@ -40,11 +39,10 @@ SOURCES_LIST = \
 	controls_keyboard.c\
 	controls_mouse.c\
 	draw.c\
-	fractol.c\
 	get_color.c\
 	init.c\
 	iterate_fractals.c\
-	print.c\
+	main_fractol.c\
 	utils.c
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 

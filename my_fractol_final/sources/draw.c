@@ -6,15 +6,13 @@
 /*   By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 13:00:17 by ctrouve           #+#    #+#             */
-/*   Updated: 2022/06/14 18:03:06 by ctrouve          ###   ########.fr       */
+/*   Updated: 2022/06/14 20:19:27 by ctrouve          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include "error_message.h"
-#include "color.h"
+#include "error.h"
 #include <pthread.h>
-
 
 /*
 ** In OpenGL and Portable Network Graphics (PNG), the RGBA byte order is used,
@@ -56,14 +54,14 @@ static void	draw_fractal_part(t_fractol *fractol)
 	}
 }
 
-void		draw_fractal(t_fractol *fractol)
+void	draw_fractal(t_fractol *fractol)
 {
 	pthread_t	threads[THREADS];
 	t_fractol	fractols[THREADS];
 	int			i;
 
-	fractol->factor = init_complex(
-		(fractol->max.re - fractol->min.re) / (WIDTH - 1),
+	fractol->factor = init_complex(\
+		(fractol->max.re - fractol->min.re) / (WIDTH - 1), \
 		(fractol->max.im - fractol->min.im) / (HEIGHT - 1));
 	i = 0;
 	while (i < THREADS)
@@ -71,7 +69,7 @@ void		draw_fractal(t_fractol *fractol)
 		fractols[i] = *fractol;
 		fractols[i].start_line = i * (HEIGHT / THREADS);
 		fractols[i].finish_line = (i + 1) * (HEIGHT / THREADS);
-		if (pthread_create(&threads[i], NULL,
+		if (pthread_create(&threads[i], NULL, \
 			(void *(*)(void *))draw_fractal_part, (void *)&fractols[i]))
 			terminate(ERR_THREADS);
 		i++;
@@ -81,32 +79,49 @@ void		draw_fractal(t_fractol *fractol)
 			terminate(ERR_THREADS);
 	mlx_put_image_to_window(fractol->mlx, fractol->window,
 		fractol->image->image, 0, 0);
-	mlx_string_put(fractol->mlx, fractol->window, 900, 965, COLOR_TUNDORA,
-		"M - Menu");
+	mlx_string_put(fractol->mlx, fractol->window, WIDTH - 100, HEIGHT - 40, \
+					0xB2F6F6, "M - Menu");
 }
 
-void		draw_menu(t_fractol *fractol)
+/*
+** Norm compliance extra function
+*/
+static void	draw_menu_end(t_fractol *fractol)
+{
+	mlx_string_put(fractol->mlx, fractol->window, (WIDTH / 2 - 120), \
+	(HEIGHT / 3 + 150), 0xF2F2F2, \
+		"Zoom           - Scroll");
+	mlx_string_put(fractol->mlx, fractol->window, (WIDTH / 2 - 120), \
+	(HEIGHT / 3 + 180), 0xF2F2F2, \
+		"Iterations     - +/-");
+	mlx_string_put(fractol->mlx, fractol->window, (WIDTH / 2 - 120), \
+	(HEIGHT / 3 + 210), 0xF2F2F2, \
+		"Julia Constant - Mouse");
+	mlx_string_put(fractol->mlx, fractol->window, (WIDTH / 2 - 120), \
+	(HEIGHT / 3 + 240), 0xF2F2F2, \
+		"Mouse Lock     - Space");
+	mlx_string_put(fractol->mlx, fractol->window, (WIDTH / 2 - 120), \
+	(HEIGHT / 3 + 270), 0xF2F2F2, \
+		"Close Menu     - M");
+}
+
+void	draw_menu(t_fractol *fractol)
 {
 	ft_bzero(fractol->image->data_addr,
 		WIDTH * HEIGHT * (fractol->image->bits_per_pixel / 8));
 	mlx_put_image_to_window(fractol->mlx, fractol->window,
 		fractol->image->image, 0, 0);
-	mlx_string_put(fractol->mlx, fractol->window, 460, 355, COLOR_SILVER,
+	mlx_string_put(fractol->mlx, fractol->window, (WIDTH / 2 - 40), \
+	HEIGHT / 3, 0xF2F2F2, \
 		"Controls");
-	mlx_string_put(fractol->mlx, fractol->window, 385, 400, COLOR_SILVER,
+	mlx_string_put(fractol->mlx, fractol->window, (WIDTH / 2 - 120), \
+	(HEIGHT / 3 + 60), 0xF2F2F2, \
 		"Reset          - R");
-	mlx_string_put(fractol->mlx, fractol->window, 385, 430, COLOR_SILVER,
+	mlx_string_put(fractol->mlx, fractol->window, (WIDTH / 2 - 120), \
+	(HEIGHT / 3 + 90), 0xF2F2F2, \
 		"Color Shift    - C");
-	mlx_string_put(fractol->mlx, fractol->window, 385, 460, COLOR_SILVER,
+	mlx_string_put(fractol->mlx, fractol->window, (WIDTH / 2 - 120), \
+	(HEIGHT / 3 + 120), 0xF2F2F2, \
 		"Move           - Arrows");
-	mlx_string_put(fractol->mlx, fractol->window, 385, 490, COLOR_SILVER,
-		"Zoom           - Scroll");
-	mlx_string_put(fractol->mlx, fractol->window, 385, 520, COLOR_SILVER,
-		"Iterations     - +/-");
-	mlx_string_put(fractol->mlx, fractol->window, 385, 550, COLOR_SILVER,
-		"Julia Constant - Mouse");
-	mlx_string_put(fractol->mlx, fractol->window, 385, 580, COLOR_SILVER,
-		"Mouse Lock     - Space");
-	mlx_string_put(fractol->mlx, fractol->window, 385, 610, COLOR_SILVER,
-		"Close Menu     - M");
+	draw_menu_end(fractol);
 }

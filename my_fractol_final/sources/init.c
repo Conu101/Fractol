@@ -6,12 +6,12 @@
 /*   By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 20:01:26 by ctrouve           #+#    #+#             */
-/*   Updated: 2022/06/09 19:38:55 by ctrouve          ###   ########.fr       */
+/*   Updated: 2022/06/14 19:55:26 by ctrouve          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include "error_message.h"
+#include "error.h"
 
 t_image		*init_image(void *mlx)
 {
@@ -41,10 +41,10 @@ t_complex	init_complex(double re, double im)
 void		set_defaults(t_fractol *fractol)
 {
 	fractol->max_iteration = 100;
-	fractol->min = init_complex(-2.0, -2.0);
+	fractol->min = init_complex(-2.2, -1.2);
 	fractol->max.re = 2.0;
 	fractol->max.im = fractol->min.im
 		+ (fractol->max.re - fractol->min.re) * HEIGHT / WIDTH;
-	fractol->k = init_complex(-0.4, 0.6);
+	fractol->k = init_complex(-0.5, 0.7);
 	fractol->color_shift = 0;
 }
