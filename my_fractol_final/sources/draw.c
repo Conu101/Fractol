@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/22 18:06:05 by vbrazhni          #+#    #+#             */
-/*   Updated: 2022/06/09 12:32:34 by ctrouve          ###   ########.fr       */
+/*   Created: 2022/06/02 13:00:17 by ctrouve           #+#    #+#             */
+/*   Updated: 2022/06/14 18:03:06 by ctrouve          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 #include "error_message.h"
 #include "color.h"
 #include <pthread.h>
+
+
+/*
+** In OpenGL and Portable Network Graphics (PNG), the RGBA byte order is used,
+** where the colors are stored in memory such that R is at the lowest address, 
+** G after it, B after that, and A last.
+*/
 
 static void	put_pixel(t_fractol *fractol, int x, int y, t_color color)
 {
@@ -66,19 +73,19 @@ void		draw_fractal(t_fractol *fractol)
 		fractols[i].finish_line = (i + 1) * (HEIGHT / THREADS);
 		if (pthread_create(&threads[i], NULL,
 			(void *(*)(void *))draw_fractal_part, (void *)&fractols[i]))
-			terminate(ERR_TREADS);
+			terminate(ERR_THREADS);
 		i++;
 	}
 	while (i-- > 0)
 		if (pthread_join(threads[i], NULL))
-			terminate(ERR_TREADS);
+			terminate(ERR_THREADS);
 	mlx_put_image_to_window(fractol->mlx, fractol->window,
 		fractol->image->image, 0, 0);
 	mlx_string_put(fractol->mlx, fractol->window, 900, 965, COLOR_TUNDORA,
-		"H - Help");
+		"M - Menu");
 }
 
-void		draw_help(t_fractol *fractol)
+void		draw_menu(t_fractol *fractol)
 {
 	ft_bzero(fractol->image->data_addr,
 		WIDTH * HEIGHT * (fractol->image->bits_per_pixel / 8));
@@ -101,5 +108,5 @@ void		draw_help(t_fractol *fractol)
 	mlx_string_put(fractol->mlx, fractol->window, 385, 580, COLOR_SILVER,
 		"Mouse Lock     - Space");
 	mlx_string_put(fractol->mlx, fractol->window, 385, 610, COLOR_SILVER,
-		"Close Help     - H");
+		"Close Menu     - M");
 }

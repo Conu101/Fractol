@@ -6,7 +6,7 @@
 /*   By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 17:56:58 by ctrouve           #+#    #+#             */
-/*   Updated: 2022/06/08 18:38:02 by ctrouve          ###   ########.fr       */
+/*   Updated: 2022/06/09 11:48:43 by ctrouve          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	draw_px(t_fractol *fractol, t_vec2 pos)
 	put_pixel(&fractol->mlx, pos.x, pos.y, color);
 }
 
-void		draw_win(t_fractol *fractol)
+void	draw_win(t_fractol *fractol)
 {
 	t_vec2	tmp;
 	tmp.y = 0;

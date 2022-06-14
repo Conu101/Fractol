@@ -5,15 +5,15 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/06/08 17:43:36 by ctrouve           #+#    #+#              #
-#    Updated: 2022/06/09 11:59:56 by ctrouve          ###   ########.fr        #
+#    Created: 2022/06/01 15:23:07 by ctrouve           #+#    #+#              #
+#    Updated: 2022/06/14 18:50:41 by ctrouve          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fractolfab
+NAME = fractol
 
 CC = gcc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -O3
 LIBRARIES = -lmlx -lm -lft\
 	-L$(LIBFT_DIRECTORY) -L$(MINILIBX_DIRECTORY)\
 	-framework OpenGL -framework AppKit
@@ -27,37 +27,35 @@ MINILIBX = $(MINILIBX_DIRECTORY)libmlx.a
 MINILIBX_DIRECTORY = ./minilibx_macos/
 MINILIBX_HEADERS = $(MINILIBX_DIRECTORY)
 
-HEADERS_DIRECTORY = ./includes/
 HEADERS_LIST = \
 	fractol.h\
-	mlx_keycodes.h
+	color.h\
+	key_macos.h\
+	error_message.h
+HEADERS_DIRECTORY = ./includes/
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_DIRECTORY = ./sources/
 SOURCES_LIST = \
+	controls_keyboard.c\
+	controls_mouse.c\
 	draw.c\
-	exit.c\
-	fade.c\
+	fractol.c\
+	get_color.c\
 	init.c\
-	julia.c\
-	key_hook.c\
-	main.c\
-	mandelbrot.c\
-	mlx.c\
-	put_pixel.c\
-	ship.c\
-	sierpinski.c\
-	zoom.c
+	iterate_fractals.c\
+	print.c\
+	utils.c
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 
-OBJECTS_DIRECTORY = ./objects/
+OBJECTS_DIRECTORY = objects/
 OBJECTS_LIST = $(patsubst %.c, %.o, $(SOURCES_LIST))
 OBJECTS	= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
 
 # COLORS
 
 GREEN = \033[0;32m
-RED = \033[0;31m
+YELLOW = \033[0;33m
 RESET = \033[0m
 
 .PHONY: all clean fclean re
@@ -89,16 +87,16 @@ clean:
 	@$(MAKE) -sC $(LIBFT_DIRECTORY) clean
 	@$(MAKE) -sC $(MINILIBX_DIRECTORY) clean
 	@rm -rf $(OBJECTS_DIRECTORY)
-	@echo "$(NAME): $(RED)$(OBJECTS_DIRECTORY) was deleted$(RESET)"
-	@echo "$(NAME): $(RED)object files were deleted$(RESET)"
+	@echo "$(NAME): $(YELLOW)$(OBJECTS_DIRECTORY) was deleted$(RESET)"
+	@echo "$(NAME): $(YELLOW)object files were deleted$(RESET)"
 
 fclean: clean
 	@rm -f $(MINILIBX)
-	@echo "$(NAME): $(RED)$(MINILIBX) was deleted$(RESET)"
+	@echo "$(NAME): $(YELLOW)$(MINILIBX) was deleted$(RESET)"
 	@rm -f $(LIBFT)
-	@echo "$(NAME): $(RED)$(LIBFT) was deleted$(RESET)"
+	@echo "$(NAME): $(YELLOW)$(LIBFT) was deleted$(RESET)"
 	@rm -f $(NAME)
-	@echo "$(NAME): $(RED)$(NAME) was deleted$(RESET)"
+	@echo "$(NAME): $(YELLOW)$(NAME) was deleted$(RESET)"
 
 re:
 	@$(MAKE) fclean
