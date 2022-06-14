@@ -6,7 +6,7 @@
 /*   By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 14:47:39 by ctrouve           #+#    #+#             */
-/*   Updated: 2022/06/14 20:26:13 by ctrouve          ###   ########.fr       */
+/*   Updated: 2022/06/14 21:07:40 by ctrouve          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "mlx.h"
 # include <stdint.h>
 
-typedef enum
+typedef enum e_bool
 {
 	false,
 	true
@@ -42,7 +42,7 @@ typedef enum
 ** https://www.educative.io/edpresso/what-is-the-difference-between-rgba-and-argb
 */
 
-typedef	struct		s_color
+typedef struct s_color
 {
 	int8_t			channel[4];
 }					t_color;
@@ -56,12 +56,11 @@ typedef	struct		s_color
 ** im — imaginary part
 */
 
-typedef struct		s_complex
+typedef struct s_complex
 {
 	double			re;
 	double			im;
 }					t_complex;
-
 
 /*
 **  Position
@@ -72,12 +71,11 @@ typedef struct		s_complex
 ** y — vertical
 */
 
-typedef struct		s_position
+typedef struct s_position
 {
 	int				x;
 	int				y;
 }					t_position;
-
 
 /*
 ** Image
@@ -91,7 +89,7 @@ typedef struct		s_position
 ** endian         — little or big endian
 */
 
-typedef struct		s_image
+typedef struct s_image
 {
 	void			*image;
 	char			*data_addr;
@@ -122,7 +120,7 @@ typedef struct		s_image
 ** is_help        — flag that reports help screen is displayed or is not
 */
 
-typedef struct		s_fractol
+typedef struct s_fractol
 {
 	void			*mlx;
 	void			*window;
@@ -150,7 +148,7 @@ typedef struct		s_fractol
 ** formula — formula of fractal
 */
 
-typedef struct		s_formula
+typedef struct s_formula
 {
 	char			*name;
 	int				(*formula)(t_fractol *fractol);
@@ -164,7 +162,7 @@ typedef struct		s_formula
 ** Formulas
 */
 
-int					(*get_formula(char *name)) (t_fractol *fractol);
+int					(*get_formula(char *name))(t_fractol *fractol);
 
 /*
 ** Init
@@ -195,7 +193,6 @@ int					iterate_julia(t_fractol *fractol);
 int					iterate_celtic_mandelbrot(t_fractol *fractol);
 
 int					iterate_sierpinski(t_fractol *fractol);
-
 
 /*
 ** Color

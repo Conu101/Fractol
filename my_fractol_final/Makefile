@@ -6,7 +6,7 @@
 #    By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/01 15:23:07 by ctrouve           #+#    #+#              #
-#    Updated: 2022/06/14 19:29:52 by ctrouve          ###   ########.fr        #
+#    Updated: 2022/06/14 20:57:26 by ctrouve          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,11 +39,11 @@ SOURCES_LIST = \
 	controls_keyboard.c\
 	controls_mouse.c\
 	draw.c\
+	formulas_utils.c\
 	get_color.c\
 	init.c\
 	iterate_fractals.c\
-	main_fractol.c\
-	utils.c
+	main_fractol.c
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCES_LIST))
 
 OBJECTS_DIRECTORY = objects/

@@ -6,25 +6,27 @@
 /*   By: ctrouve <ctrouve@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 20:01:26 by ctrouve           #+#    #+#             */
-/*   Updated: 2022/06/14 19:55:26 by ctrouve          ###   ########.fr       */
+/*   Updated: 2022/06/14 20:40:32 by ctrouve          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "error.h"
 
-t_image		*init_image(void *mlx)
+t_image	*init_image(void *mlx)
 {
 	t_image		*image;
 
-	if (!(image = (t_image *)ft_memalloc(sizeof(t_image))))
+	image = (t_image *)ft_memalloc(sizeof(t_image));
+	if (!image)
 		terminate(ERR_IMAGE_INIT);
-	if (!(image->image = mlx_new_image(mlx, WIDTH, HEIGHT)))
+	image->image = mlx_new_image(mlx, WIDTH, HEIGHT);
+	if (!image->image)
 		terminate(ERR_IMAGE_INIT);
-	image->data_addr = mlx_get_data_addr(
-		image->image,
-		&(image->bits_per_pixel),
-		&(image->size_line),
+	image->data_addr = mlx_get_data_addr(\
+		image->image, \
+		&(image->bits_per_pixel), \
+		&(image->size_line), \
 		&(image->endian));
 	return (image);
 }
@@ -38,7 +40,7 @@ t_complex	init_complex(double re, double im)
 	return (complex);
 }
 
-void		set_defaults(t_fractol *fractol)
+void	set_defaults(t_fractol *fractol)
 {
 	fractol->max_iteration = 100;
 	fractol->min = init_complex(-2.2, -1.2);
