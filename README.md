@@ -122,7 +122,7 @@ Sierkinspi carpet
 The main steps to succeed in the Fractol project were:
 
 personal: 
-* although this project was more demanding tha the previous one, I found the learning curve more manageable than for FdF because the graphics interface was a familiar tool and the topic was passinating.
+* although this project was more demanding tha the previous one, I found the learning curve more manageable than for FdF because the graphics interface was a familiar tool and the topic was passionating.
 
 technical:
 * familiarisation with complex numbers, research of the equations allowing to draw each set of fractals.
